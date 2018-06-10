@@ -16,8 +16,5 @@ public class HomeController {
 		return "secure";
 	}
 	
-	@GetMapping("/restClient")
-	public String restClientPage() {
-		return "rest";		
-	}
+	
 }
