@@ -47,5 +47,10 @@ public class ProductService   {
 	public List<Product> findByProductType(ProductType productType) {
 		 return productRepository.findByProductType(productType);
 	}
+
+	public Product getById(int productId) {
+		// TODO Auto-generated method stub
+		return productRepository.getOne(productId);
+	}
 	
 }

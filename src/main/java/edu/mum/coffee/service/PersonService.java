@@ -32,4 +32,9 @@ public class PersonService {
 		personRepository.delete(person);
 	}
 
+	public List<Person> getAll() {
+		
+		return personRepository.findAll();
+	}
+
 }
