@@ -90,18 +90,17 @@ public class ProductController {
  
     // ------------------- Delete a User-----------------------------------------
  
-    @RequestMapping(value = "/product/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteUser() {
+    @RequestMapping(value = "/deletepro/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteUser(@PathVariable("id") int id) {
        
-    	Integer x=0;
-    	x=3;
-//    	Product product = productService.getById(id);
-//        if (product == null) {
-//            
-//            return new ResponseEntity(new CustomErrorType("Unable to delete. Product with id " + id + " not found."),
-//                    HttpStatus.NOT_FOUND);
-//        }
-//        productService.delete(product);;
+    	
+    	Product product = productService.getById(id);
+        if (product == null) {
+            
+            return new ResponseEntity(new CustomErrorType("Unable to delete. Product with id " + id + " not found."),
+                    HttpStatus.NOT_FOUND);
+        }
+        productService.delete(product);;
         return new ResponseEntity<Product>(HttpStatus.NO_CONTENT);
     }
  

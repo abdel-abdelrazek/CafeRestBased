@@ -15,16 +15,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/", "/home", "/index").permitAll()
+                .antMatchers("/**").permitAll()
                 //.anyRequest().authenticated()
-                .and()
-            .formLogin()
-            	.permitAll()
-            	.and()
-            .logout()
-            	.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-            	.logoutSuccessUrl("/")
-                .permitAll();
+                .and().csrf().disable();
+//            .formLogin()
+//            	.permitAll()
+//            	.and()
+//            .logout()
+//            	.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//            	.logoutSuccessUrl("/")
+//                .permitAll();
     }
 
 	@Autowired
