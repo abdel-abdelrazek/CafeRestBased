@@ -50,7 +50,7 @@ public class ProductService   {
 
 	public Product getById(int productId) {
 		// TODO Auto-generated method stub
-		return productRepository.getOne(productId);
+		return productRepository.findOne(productId);
 	}
 	
 }

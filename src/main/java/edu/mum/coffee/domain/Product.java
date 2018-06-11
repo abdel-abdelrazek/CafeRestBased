@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Product implements Serializable{
+public class Product {
 
 	@Id
 	@GeneratedValue

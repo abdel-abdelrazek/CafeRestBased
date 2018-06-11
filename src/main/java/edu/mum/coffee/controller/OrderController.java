@@ -16,70 +16,72 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import edu.mum.coffee.domain.Person;
-import edu.mum.coffee.domain.Person;
+import edu.mum.coffee.domain.Order;
+import edu.mum.coffee.domain.Order;
 import edu.mum.coffee.genral.CustomErrorType;
-import edu.mum.coffee.service.PersonService;
-
+import edu.mum.coffee.service.OrderService;
+ 
+ 
 @RestController
 @RequestMapping("/api")
-public class PersonController {
+public class OrderController {
  
     
     @Autowired
-    PersonService personService; //Service which will do all data retrieval/manipulation work
+    OrderService orderService; //Service which will do all data retrieval/manipulation work
  
     // -------------------Retrieve All Users---------------------------------------------
  
-    @GetMapping(value = "/Persons")
-    public ResponseEntity<List<Person>> listAllUsers() {
-        List<Person> Persons = personService.getAll();
-        if (Persons.isEmpty()) {
+    @GetMapping(value = "/Orders")
+    public ResponseEntity<List<Order>> listAllUsers() {
+        List<Order> Orders = orderService.findAll();
+        if (Orders.isEmpty()) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<Person>>(Persons, HttpStatus.OK);
+        return new ResponseEntity<List<Order>>(Orders, HttpStatus.OK);
     }
  
     // -------------------Retrieve Single User------------------------------------------
  
-    @GetMapping(value = "/Person/{id}")
-    public ResponseEntity<?> getUser(@PathVariable("id") long id) {
-        Person Person = personService.findById(id);
-        if (Person == null) {
+    @GetMapping(value = "/Order/{id}")
+    public ResponseEntity<?> getUser(@PathVariable("id") int id) {
+        Order Order = orderService.findById(id);
+        if (Order == null) {
             
             return new ResponseEntity(new CustomErrorType("User with id " + id 
                     + " not found"), HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Person>(Person, HttpStatus.OK);
+        return new ResponseEntity<Order>(Order, HttpStatus.OK);
     }
  
     // -------------------Create a User-------------------------------------------
  
     @RequestMapping(value = "/user/", method = RequestMethod.POST)
-    public ResponseEntity<?> createUser(@RequestBody Person Person, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<?> createUser(@RequestBody Order Order, UriComponentsBuilder ucBuilder) {
        
       
-        personService.savePerson(Person);
+        orderService.save(Order);
  
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/api/user/{id}").buildAndExpand(Person.getId()).toUri());
+        headers.setLocation(ucBuilder.path("/api/user/{id}").buildAndExpand(Order.getId()).toUri());
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
  
 
+ 
     // ------------------- Delete a User-----------------------------------------
  
     @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteUser(@PathVariable("id") long id) {
+    public ResponseEntity<?> deleteUser(@PathVariable("id") int id) {
        
-    	Person Person = personService.findById(id);
-        if (Person == null) {
+    	Order Order = orderService.findById(id);
+        if (Order == null) {
             
-            return new ResponseEntity(new CustomErrorType("Unable to delete. Person with id " + id + " not found."),
+            return new ResponseEntity(new CustomErrorType("Unable to delete. Order with id " + id + " not found."),
                     HttpStatus.NOT_FOUND);
         }
-        personService.removePerson(Person);;
-        return new ResponseEntity<Person>(HttpStatus.NO_CONTENT);
+        orderService.delete(Order);;
+        return new ResponseEntity<Order>(HttpStatus.NO_CONTENT);
     }
  
   
