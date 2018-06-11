@@ -22,7 +22,7 @@ import edu.mum.coffee.service.ProductService;
  
  
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/productapi")
 public class ProductController {
  
     
@@ -55,7 +55,7 @@ public class ProductController {
  
     // -------------------Create a User-------------------------------------------
  
-    @RequestMapping(value = "/user/", method = RequestMethod.POST)
+    @RequestMapping(value = "/product/", method = RequestMethod.POST)
     public ResponseEntity<?> createUser(@RequestBody Product product, UriComponentsBuilder ucBuilder) {
        
       
@@ -68,7 +68,7 @@ public class ProductController {
  
     // ------------------- Update a User ------------------------------------------------
  
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/product/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateUser(@PathVariable("id") int id, @RequestBody Product pProduct) {
         
         Product product = productService.getById(id);
@@ -90,16 +90,18 @@ public class ProductController {
  
     // ------------------- Delete a User-----------------------------------------
  
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteUser(@PathVariable("id") int id) {
+    @RequestMapping(value = "/product/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteUser() {
        
-    	Product product = productService.getById(id);
-        if (product == null) {
-            
-            return new ResponseEntity(new CustomErrorType("Unable to delete. Product with id " + id + " not found."),
-                    HttpStatus.NOT_FOUND);
-        }
-        productService.delete(product);;
+    	Integer x=0;
+    	x=3;
+//    	Product product = productService.getById(id);
+//        if (product == null) {
+//            
+//            return new ResponseEntity(new CustomErrorType("Unable to delete. Product with id " + id + " not found."),
+//                    HttpStatus.NOT_FOUND);
+//        }
+//        productService.delete(product);;
         return new ResponseEntity<Product>(HttpStatus.NO_CONTENT);
     }
  

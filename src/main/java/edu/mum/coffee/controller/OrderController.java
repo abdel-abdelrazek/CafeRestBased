@@ -23,7 +23,7 @@ import edu.mum.coffee.service.OrderService;
  
  
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/orderapi")
 public class OrderController {
  
     

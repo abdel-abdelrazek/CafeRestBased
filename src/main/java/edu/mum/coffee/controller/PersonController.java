@@ -22,7 +22,7 @@ import edu.mum.coffee.genral.CustomErrorType;
 import edu.mum.coffee.service.PersonService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/personapi")
 public class PersonController {
  
     
